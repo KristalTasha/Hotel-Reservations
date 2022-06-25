@@ -1,3 +1,9 @@
 .reception-cont {
   text-align: center;
+
+  .front-desk{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
 }
