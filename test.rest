@@ -1,0 +1,19 @@
+# GET http://localhost:9090/reservations
+# content-type: application/json
+
+
+# POST http://localhost:9090/book-room
+# content-type: application/json
+
+# {
+#     "pname": "John Royce",
+#     "persons": 4
+# }
+
+
+# DELETE http://localhost:9090/delete/e6abcb22-46b3-4fa9-a9e0-eacccb6c16be
+# content-type: application/json
+
+
+PUT http://localhost:9090/checked/6593ae88-d456-4b4e-ad1c-b0d709748ff3
+content-type: application/json
