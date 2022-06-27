@@ -3,6 +3,6 @@ import './styles/footer.scss'
 
 export default function Footer() {
   return (
-    <footer>this is the footer</footer>
+    <footer>&copy; 2022 Hotel de La Krissate </footer>
   )
 }

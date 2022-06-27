@@ -6,6 +6,8 @@ import Footer from './components/footer';
 import './reception.scss';
 
 function Reception() {
+
+  
   return (
     <div className="reception-cont">
      <Navbar/>
