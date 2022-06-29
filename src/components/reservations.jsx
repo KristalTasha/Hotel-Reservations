@@ -1,8 +1,14 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { addBooking } from '../store/slices/reservationSlice';
+import { useDispatch } from 'react-redux';
 import './styles/reservations.scss'
 
 export default function Reservations() {
+
+  const dispatch = useDispatch()
+
+  dispatch(addBooking())
 
   const [bookingList, setBookingList] = useState([])
   const [loading, setLoading] = useState(false)
@@ -38,7 +44,7 @@ export default function Reservations() {
 
   useEffect(() => {
     bookings()
-  }, [loading])
+  }, [])
 
 
   const deleteBooking = async (id) => {
