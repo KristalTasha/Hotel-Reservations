@@ -13,7 +13,11 @@ export const reservationSlice = createSlice({
             }
 
             state.reservationList.push(newBooking)
-       } 
+       },
+
+       deleteBooking: (state, action) => {
+           state.reservationList.filter(booking => booking !== action.payload)
+       }
     }
 })
 
