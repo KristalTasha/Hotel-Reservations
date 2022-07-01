@@ -1,12 +1,17 @@
 import axios from 'axios'
 import React, { useState } from 'react'
+import { addBooking } from '../store/slices/reservationSlice';
+import { useDispatch } from 'react-redux';
 import './styles/book-room.scss'
 
 export default function BookRoom() {
 
+
   const [ pname, setName ] = useState('')
   const [ persons, setPersons ] = useState('')
   const [ date, setDate ] = useState('')
+
+  const dispatch = useDispatch()
 
 
   const bookRoom = async (e) => {
@@ -18,6 +23,8 @@ export default function BookRoom() {
         persons,
         date
       })
+
+      dispatch(addBooking({pname, persons, date}))
 
       const { data } = response;
       console.log('post data ---', data)

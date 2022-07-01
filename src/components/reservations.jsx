@@ -1,21 +1,24 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { addBooking } from '../store/slices/reservationSlice';
-import { useDispatch } from 'react-redux';
+import { delBooking, checkBooking } from '../store/slices/reservationSlice'
+import { useSelector, useDispatch } from 'react-redux'
 import './styles/reservations.scss'
 
 export default function Reservations() {
 
-  const dispatch = useDispatch()
-
-  dispatch(addBooking())
+ const dispatch = useDispatch();
 
   const [bookingList, setBookingList] = useState([])
   const [loading, setLoading] = useState(false)
 
+  const allBookings = useSelector((state) => state.reservations.reservationList )
+  console.log('state from toolkit', allBookings)
 
   const bookings = async () => {
     try {
+
+       //from redux
+       setBookingList(allBookings)
 
       console.log('before', bookingList)
 
@@ -26,7 +29,11 @@ export default function Reservations() {
       const { data } = response
 
       setLoading(false)
-      setBookingList(data)
+
+      //from api
+      // setBookingList(data)
+
+     
 
       console.log('after', bookingList)
 
@@ -44,18 +51,24 @@ export default function Reservations() {
 
   useEffect(() => {
     bookings()
-  }, [])
+  }, [allBookings])
 
 
   const deleteBooking = async (id) => {
     try{
+
+      dispatch(delBooking(id))
+      setBookingList(allBookings)
+
       const response = await axios.delete(`http://localhost:9090/delete/${id}`)
 
       const { data } = response
 
-      if(data){
-        setBookingList(data)
-      }
+      // if(data){
+      //   // setBookingList(data)
+      // }
+
+      
     } catch(error){
       console.log(error)
     }
@@ -64,13 +77,19 @@ export default function Reservations() {
 
   const checkInToggle = async (id) => {
     try{
+
+   
+      dispatch(checkBooking(id))
+      setBookingList(allBookings)
+
        const response = await axios.put(`http://localhost:9090/checked/${id}`)
 
        const { data } = response
 
-       if(data){
-         setBookingList(data)
-       }
+      //  if(data){
+      //    setBookingList(data)
+      //  }
+
     } catch(error){
       console.log('update error---', error)
     }
