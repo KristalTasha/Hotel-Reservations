@@ -1,12 +1,13 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { delBooking, checkBooking } from '../store/slices/reservationSlice'
+import { delBooking, checkBooking, fetchBookings } from '../store/slices/reservationSlice'
 import { useSelector, useDispatch } from 'react-redux'
 import './styles/reservations.scss'
 
 export default function Reservations() {
 
  const dispatch = useDispatch();
+
 
   const [bookingList, setBookingList] = useState([])
   const [loading, setLoading] = useState(false)
@@ -17,25 +18,27 @@ export default function Reservations() {
   const bookings = async () => {
     try {
 
+      dispatch(fetchBookings())
+
        //from redux
        setBookingList(allBookings)
 
       console.log('before', bookingList)
 
-      setLoading(true)
+      // setLoading(true)
 
-      const response = await axios.get('http://localhost:9090/reservations')
+      // const response = await axios.get('http://localhost:9090/reservations')
 
-      const { data } = response
+      // const { data } = response
 
-      setLoading(false)
+      // setLoading(false)
 
       //from api
       // setBookingList(data)
 
      
 
-      console.log('after', bookingList)
+      // console.log('after', bookingList)
 
 
       // if(data){

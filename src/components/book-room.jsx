@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-import { addBooking } from '../store/slices/reservationSlice';
+import { addBooking, addReservation } from '../store/slices/reservationSlice';
 import { useDispatch } from 'react-redux';
 import './styles/book-room.scss'
 
@@ -17,17 +17,19 @@ export default function BookRoom() {
   const bookRoom = async (e) => {
     try{
       e.preventDefault()
+      
+      dispatch(addReservation({pname, persons, date}))
 
-      const response = await axios.post('http://localhost:9090/book-room', {
-        pname,
-        persons,
-        date
-      })
+      // const response = await axios.post('http://localhost:9090/book-room', {
+      //   pname,
+      //   persons,
+      //   date
+      // })
 
-      dispatch(addBooking({pname, persons, date}))
+      // dispatch(addBooking({pname, persons, date}))
 
-      const { data } = response;
-      console.log('post data ---', data)
+      // const { data } = response;
+      // console.log('post data ---', data)
 
       setName('')
       setPersons('')
