@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { delBooking, checkBooking, fetchBookings } from '../store/slices/reservationSlice'
+import { delBooking, checkBooking, fetchBookings, updateReservation, delReservation } from '../store/slices/reservationSlice'
 import { useSelector, useDispatch } from 'react-redux'
 import './styles/reservations.scss'
 
@@ -60,12 +60,15 @@ export default function Reservations() {
   const deleteBooking = async (id) => {
     try{
 
-      dispatch(delBooking(id))
+     
+      dispatch(delReservation(id))
       setBookingList(allBookings)
 
-      const response = await axios.delete(`http://localhost:9090/delete/${id}`)
+      //dispatch(delBooking(id))
 
-      const { data } = response
+      // const response = await axios.delete(`http://localhost:9090/delete/${id}`)
+
+      // const { data } = response
 
       // if(data){
       //   // setBookingList(data)
@@ -81,13 +84,16 @@ export default function Reservations() {
   const checkInToggle = async (id) => {
     try{
 
-   
-      dispatch(checkBooking(id))
+
+      dispatch(updateReservation(id))
       setBookingList(allBookings)
 
-       const response = await axios.put(`http://localhost:9090/checked/${id}`)
+         
+      //dispatch(checkBooking(id))
 
-       const { data } = response
+      //  const response = await axios.put(`http://localhost:9090/checked/${id}`)
+
+      //  const { data } = response
 
       //  if(data){
       //    setBookingList(data)

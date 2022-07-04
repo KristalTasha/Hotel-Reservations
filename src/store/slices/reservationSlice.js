@@ -16,6 +16,23 @@ export const addReservation = createAsyncThunk('add/reservation', async ({pname,
 
 })
 
+
+export const updateReservation = createAsyncThunk('update/reservation', async (id) => {
+    const response = await axios.put(`http://localhost:9090/checked/${id}`)
+
+    return response.data
+
+})
+
+export const delReservation = createAsyncThunk('delete/reservation', async (id) => {
+    const response = await axios.delete(`http://localhost:9090/delete/${id}`)
+
+    return response.data
+
+})
+
+
+
 export const reservationSlice = createSlice({
     name: 'reservations',
     initialState: {
@@ -59,6 +76,7 @@ export const reservationSlice = createSlice({
 
     },
 
+    //thunk reducers
     extraReducers: builder => {
         builder.addCase(fetchBookings.pending, (state, action ) => {
             state.loading = true
@@ -80,6 +98,28 @@ export const reservationSlice = createSlice({
             state.loading = false
         })
         .addCase(addReservation.rejected, (state, action) => {
+            state.loading = false
+            state.error = action.error.message
+        })
+        .addCase(updateReservation.pending, (state, action) => {
+            state.loading = true
+        })
+        .addCase(updateReservation.fulfilled, (state, action) => {
+            state.reservationList = action.payload;
+            state.loading = false
+        })
+        .addCase(updateReservation.rejected, (state, action) => {
+            state.loading = false
+            state.error = action.error.message
+        })
+        .addCase(delReservation.pending, (state, action) => {
+            state.loading = true
+        })
+        .addCase(delReservation.fulfilled, (state, action) => {
+            state.reservationList = action.payload;
+            state.loading = false
+        })
+        .addCase(delReservation.rejected, (state, action) => {
             state.loading = false
             state.error = action.error.message
         })
